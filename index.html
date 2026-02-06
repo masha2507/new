@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Be My Valentine 💘</title>
+<title>Zootopia Valentine 💘</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
@@ -12,7 +13,8 @@ body{
   margin:0;
   height:100vh;
   font-family:'Pacifico',cursive;
-  background:url('https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.pinimg.com%2F736x%2Fd4%2F41%2Fdd%2Fd441dd11ec8be04030aba73501cb5914.jpg') center/cover no-repeat;
+  background:url("https://i.pinimg.com/736x/d4/41/dd/d441dd11ec8be04030aba73501cb5914.jpg")
+    center/cover no-repeat;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -22,10 +24,19 @@ body{
 }
 
 .card{
-  background:rgba(0,0,0,0.55);
-  padding:30px;
-  border-radius:20px;
+  background:rgba(0,0,0,0.6);
+  padding:35px;
+  border-radius:25px;
   max-width:90%;
+  box-shadow:0 0 25px rgba(255,255,255,0.2);
+}
+
+h1{
+  font-size:2.2rem;
+}
+
+p{
+  font-size:1.2rem;
 }
 
 button{
@@ -35,6 +46,7 @@ button{
   border:none;
   border-radius:30px;
   cursor:pointer;
+  transition:0.2s;
 }
 
 #yes{
@@ -42,16 +54,22 @@ button{
   color:white;
 }
 
+#yes:hover{
+  transform:scale(1.1);
+}
+
 #no{
   background:#ccc;
   position:absolute;
 }
 
-.hidden{display:none}
+.hidden{
+  display:none;
+}
 
 .heart{
   position:absolute;
-  font-size:20px;
+  font-size:28px;
   animation:fall 5s linear infinite;
 }
 
@@ -59,22 +77,42 @@ button{
   0%{top:-10%;}
   100%{top:110%;}
 }
+
+.signature{
+  margin-top:25px;
+  font-size:1rem;
+  opacity:0.8;
+}
 </style>
 </head>
 
 <body>
 
 <div class="card">
-  <h1>💘 Will you be my Valentine, Silmiya? 💘</h1>
-  <p>“You know you love someone when you can’t explain why without saying their name.” 🦊🐰</p>
+  <h1>🦊🐰 Silmiya, will you be Mani’s Valentine? 💘</h1>
 
-  <button id="yes">Yes 💖</button>
+  <p>
+    “In Zootopia, anyone can be anything…  
+    and you are my favorite everything.” 💖
+  </p>
+
+  <button id="yes">Yes 💞</button>
   <button id="no">No 🙈</button>
 
   <div id="love" class="hidden">
-    <h2>💕 Yay!!! I knew it 💕</h2>
-    <p>💌 Dear Silmiya, you’re my favorite smile and my forever Valentine 💖</p>
+    <h2>💞 Yay!!! I knew it 💞</h2>
+
+    <p>
+      💌 Dear Silmiya, you’re my favorite smile  
+      and my forever Valentine 💖  
+      <br><br>
+      — With love, Mani 🦊💕
+    </p>
   </div>
+
+  <p class="signature">
+    Made with 💖 by Mani
+  </p>
 </div>
 
 <audio id="sound" src="https://www.soundjay.com/human/kiss-01.mp3"></audio>
@@ -86,23 +124,31 @@ const love=document.getElementById('love');
 const sound=document.getElementById('sound');
 
 function escape(){
-  no.style.left=Math.random()*(window.innerWidth-100)+'px';
-  no.style.top=Math.random()*(window.innerHeight-100)+'px';
+  no.style.left=Math.random()*(window.innerWidth-120)+'px';
+  no.style.top=Math.random()*(window.innerHeight-120)+'px';
 }
-['mouseover','click','touchstart'].forEach(e=>no.addEventListener(e,escape));
+
+['mouseover','click','touchstart'].forEach(e =>
+  no.addEventListener(e, escape)
+);
 
 yes.onclick=()=>{
   sound.play();
   love.classList.remove('hidden');
-  yes.style.display=no.style.display='none';
 
-  for(let i=0;i<30;i++){
+  yes.style.display="none";
+  no.style.display="none";
+
+  // heart rain effect
+  for(let i=0;i<35;i++){
     let h=document.createElement('div');
     h.className='heart';
-    h.innerHTML='💕';
+    h.innerHTML='💞';
     h.style.left=Math.random()*100+'vw';
     h.style.animationDuration=3+Math.random()*3+'s';
+
     document.body.appendChild(h);
+
     setTimeout(()=>h.remove(),6000);
   }
 };
