@@ -4,35 +4,77 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Be My Valentine 💘</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 <style>
 body{
-margin:0;height:100vh;font-family:'Pacifico',cursive;
-background:url('https://upload.wikimedia.org/wikipedia/en/9/9b/Zootopia_characters.png') center/cover no-repeat;
-display:flex;align-items:center;justify-content:center;
-color:white;text-align:center;overflow:hidden}
-.card{background:rgba(0,0,0,.55);padding:30px;border-radius:20px;max-width:90%}
-button{font-size:1.2rem;padding:12px 25px;margin:10px;border:none;border-radius:30px;cursor:pointer}
-#yes{background:#ff4d6d;color:white}
-#no{background:#ccc;position:absolute}
-.heart{position:absolute;font-size:20px;animation:fall 5s linear infinite}
-@keyframes fall{0%{top:-10%}100%{top:110%}}
+  margin:0;
+  height:100vh;
+  font-family:'Pacifico',cursive;
+  background:url('https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.pinimg.com%2F736x%2Fd4%2F41%2Fdd%2Fd441dd11ec8be04030aba73501cb5914.jpg') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  text-align:center;
+  overflow:hidden;
+}
+
+.card{
+  background:rgba(0,0,0,0.55);
+  padding:30px;
+  border-radius:20px;
+  max-width:90%;
+}
+
+button{
+  font-size:1.2rem;
+  padding:12px 25px;
+  margin:10px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+}
+
+#yes{
+  background:#ff4d6d;
+  color:white;
+}
+
+#no{
+  background:#ccc;
+  position:absolute;
+}
+
 .hidden{display:none}
+
+.heart{
+  position:absolute;
+  font-size:20px;
+  animation:fall 5s linear infinite;
+}
+
+@keyframes fall{
+  0%{top:-10%;}
+  100%{top:110%;}
+}
 </style>
 </head>
+
 <body>
 
 <div class="card">
-<h1>💘 Will you be my Valentine, Silmiya? 💘</h1>
-<p>“You know you love someone when you can’t explain why without saying their name.” 🦊🐰</p>
+  <h1>💘 Will you be my Valentine, Silmiya? 💘</h1>
+  <p>“You know you love someone when you can’t explain why without saying their name.” 🦊🐰</p>
 
-<button id="yes">Yes 💖</button>
-<button id="no">No 🙈</button>
+  <button id="yes">Yes 💖</button>
+  <button id="no">No 🙈</button>
 
-<div id="love" class="hidden">
-<h2>💕 Yay!!! I knew it 💕</h2>
-<p>💌 Dear Silmiya, you’re my favorite smile and my forever Valentine 💖</p>
-</div>
+  <div id="love" class="hidden">
+    <h2>💕 Yay!!! I knew it 💕</h2>
+    <p>💌 Dear Silmiya, you’re my favorite smile and my forever Valentine 💖</p>
+  </div>
 </div>
 
 <audio id="sound" src="https://www.soundjay.com/human/kiss-01.mp3"></audio>
@@ -44,24 +86,26 @@ const love=document.getElementById('love');
 const sound=document.getElementById('sound');
 
 function escape(){
-no.style.left=Math.random()*(window.innerWidth-100)+'px';
-no.style.top=Math.random()*(window.innerHeight-100)+'px';
+  no.style.left=Math.random()*(window.innerWidth-100)+'px';
+  no.style.top=Math.random()*(window.innerHeight-100)+'px';
 }
 ['mouseover','click','touchstart'].forEach(e=>no.addEventListener(e,escape));
 
 yes.onclick=()=>{
-sound.play();
-love.classList.remove('hidden');
-yes.style.display=no.style.display='none';
-for(let i=0;i<30;i++){
-let h=document.createElement('div');
-h.className='heart';h.innerHTML='💕';
-h.style.left=Math.random()*100+'vw';
-h.style.animationDuration=3+Math.random()*3+'s';
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
-}
-}
+  sound.play();
+  love.classList.remove('hidden');
+  yes.style.display=no.style.display='none';
+
+  for(let i=0;i<30;i++){
+    let h=document.createElement('div');
+    h.className='heart';
+    h.innerHTML='💕';
+    h.style.left=Math.random()*100+'vw';
+    h.style.animationDuration=3+Math.random()*3+'s';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  }
+};
 </script>
 
 </body>
