@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
+/* ====== Styles ====== */
 body{
   margin:0;
   height:100vh;
@@ -20,6 +21,7 @@ body{
   color:white;
   text-align:center;
   overflow:hidden;
+  position:relative;
 }
 
 .card{
@@ -28,6 +30,7 @@ body{
   border-radius:25px;
   max-width:90%;
   box-shadow:0 0 25px rgba(255,255,255,0.2);
+  z-index: 10;
 }
 
 h1{
@@ -45,7 +48,7 @@ button{
   border:none;
   border-radius:30px;
   cursor:pointer;
-  transition:0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 #yes{
@@ -54,104 +57,64 @@ button{
 }
 
 #yes:hover{
-  transform:scale(1.1);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #ff4d6d;
 }
 
 #no{
   background:#ccc;
   position:absolute;
+  touch-action: none; /* mobile-friendly */
 }
 
 .hidden{
   display:none;
 }
 
-.heart{
+.heart, .sparkle{
   position:absolute;
   font-size:28px;
-  animation:fall 5s linear infinite;
+  animation-name:fall;
+  animation-timing-function: linear;
 }
 
+.sparkle{
+  font-size:18px;
+  opacity:0.8;
+  animation-name:twinkle;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+/* Falling hearts animation */
 @keyframes fall{
-  0%{top:-10%;}
-  100%{top:110%;}
+  0%{top:-10%; opacity:0;}
+  30%{opacity:1;}
+  100%{top:110%; opacity:0;}
+}
+
+/* Twinkling sparkles */
+@keyframes twinkle{
+  0%{opacity:0;}
+  50%{opacity:1; transform: scale(1.3);}
+  100%{opacity:0;}
 }
 
 .signature{
   margin-top:25px;
   font-size:1rem;
   opacity:0.8;
+  z-index: 10;
 }
 </style>
 </head>
 
 <body>
-
 <div class="card">
   <h1>🦊🐰 Silmiya, will you be my Valentine? 💘</h1>
 
   <p>
     “உன் செய்கை ஒவ்வொன்றும்
-என் காதல் அர்த்தங்கள்
-நாள்தோறும் நான் சேர்க்கும் ஞாபக சின்னங்கள்.” 💖
-  </p>
+    என் காதல் அர்த்தங்கள்
+    நாள்தோறும் நான் சேர்க்கும் ஞாபக
 
-  <button id="yes">Yes 💞</button>
-  <button id="no">No 🙈</button>
-
-  <div id="love" class="hidden">
-    <h2>💞 Yay!!! I knew it 💞</h2>
-
-    <p>
-      💌 alagiii,I love u so much laddu papa 💖  
-      <br><br>
-      — With love, Maniiiiiiiii 🦊💕
-    </p>
-  </div>
-
-  <p class="signature">
-    Made with 💖 by Mani
-  </p>
-</div>
-
-<audio id="sound" src="https://www.soundjay.com/human/kiss-01.mp3"></audio>
-
-<script>
-const no=document.getElementById('no');
-const yes=document.getElementById('yes');
-const love=document.getElementById('love');
-const sound=document.getElementById('sound');
-
-function escape(){
-  no.style.left=Math.random()*(window.innerWidth-120)+'px';
-  no.style.top=Math.random()*(window.innerHeight-120)+'px';
-}
-
-['mouseover','click','touchstart'].forEach(e =>
-  no.addEventListener(e, escape)
-);
-
-yes.onclick=()=>{
-  sound.play();
-  love.classList.remove('hidden');
-
-  yes.style.display="none";
-  no.style.display="none";
-
-  // heart rain effect
-  for(let i=0;i<35;i++){
-    let h=document.createElement('div');
-    h.className='heart';
-    h.innerHTML='💞';
-    h.style.left=Math.random()*100+'vw';
-    h.style.animationDuration=3+Math.random()*3+'s';
-
-    document.body.appendChild(h);
-
-    setTimeout(()=>h.remove(),6000);
-  }
-};
-</script>
-
-</body>
-</html>
